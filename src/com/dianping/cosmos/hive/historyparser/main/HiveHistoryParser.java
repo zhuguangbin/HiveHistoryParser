@@ -24,6 +24,9 @@ public class HiveHistoryParser {
 	private static final Logger sessionLog = Logger.getLogger("SessionLog");
 	private static final Logger queryLog = Logger.getLogger("QueryLog");
 	private static final Logger taskLog = Logger.getLogger("TaskLog");
+	
+	private static long numParsedDir = 0;
+	private static long numParsedFile = 0;
 
 	public static void parseOneFile(File logFile) {
 
@@ -155,14 +158,16 @@ public class HiveHistoryParser {
 								+ " is not a valid directory, Please give me the hive-query-log directory");
 				System.exit(1);
 			} else {
+				System.err.println("Start parsing Hive Query Log in dir :" + args[0]);
 				File[] hiveQueryLogDirPerUsers = hiveQueryLogDir.listFiles();
 				for (File userHiveQueryLogDir : hiveQueryLogDirPerUsers) {
 					if (!userHiveQueryLogDir.isDirectory()) {
-						System.err.print(userHiveQueryLogDir.getAbsolutePath()
+						System.err.println(userHiveQueryLogDir.getAbsolutePath()
 								+ " is not a user hive-query-log directory!");
 						log.error(userHiveQueryLogDir.getAbsolutePath()	+ " is not a user hive-query-log directory!");
 					} else {
 						String dirName = userHiveQueryLogDir.getName();
+						System.err.println("parsing log in dir: "+ dirName);
 						File[] hiveQueryLogs = userHiveQueryLogDir.listFiles();
 						for (File logFile : hiveQueryLogs) {
 							if (logFile.isFile() && logFile.canRead()) {
@@ -180,6 +185,13 @@ public class HiveHistoryParser {
 										// TODO: handle exception
 										log.error("ERROR while parsing file: "+ logFile.getAbsolutePath());
 									}
+									
+									numParsedFile++;
+									
+									if (numParsedFile %100 ==0) {
+										System.err.println(numParsedFile + " file parsed.");
+									}
+									
 								}
 							} else {
 								System.err.println(logFile.getAbsolutePath()
@@ -187,9 +199,17 @@ public class HiveHistoryParser {
 								log.error(logFile.getAbsolutePath()	+ " is not a readable log file");
 							}
 						}
+						
+						System.err.println( numParsedFile + " file in dir: "+ dirName + " parsed.");
+						numParsedDir++;
+						if (numParsedDir%10==0) {
+							System.err.println(numParsedDir + " dir parsed.");
+						}
 					}
 				}
 			}
+			
+			System.err.println("Summary: "+ numParsedDir + " dir , " + numParsedFile +" file parsed .");
 		}
 	}
 

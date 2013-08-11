@@ -4,19 +4,16 @@
 
   Hive History Parse parses hive query log and output three important informations to log:
 
- * sessionlog: output all session information on each hive client. 
+1. sessionlog: output all session information on each hive client. 
 log format:
-
 [SESSIONID]	[HOSTIP]	[USERNAME]	[SESSIONSTARTTIME]	[SESSIONENDTIME]
 
- * querylog: output all query information per session.
+2. querylog: output all query information per session.
 log format:
-
 [QUERYID]	[SESSIONID]	[QUERYSTRING]	[QUERYSTARTTIME]	[QUERYENDTIME]	[QUERYRETCODE]	[QUERYNUMTASK]
 
- * tasklog: output all task information per query.
+3. tasklog: output all task information per query.
 log format:
-
 [TASKID]	[QUERYID]	[TASKNAME]	[TASKSTARTTIME]	[TASKENDTIME]	[TASKRETCODE]	[TASKHADOOPID]	[TASKNUMMAPPERS]	[TASKNUMREDUCERS]	[TASKHADOOPPROGRESS]	[TASKCOUNTERS]	[TASKROWINSERTED]
 
 ### How to use it ?

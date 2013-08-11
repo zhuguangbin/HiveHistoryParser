@@ -9,8 +9,8 @@ public class SessionInfoDetail extends SessionInfo {
 	private String sessionId;
 	private String hostIP;
 	private String userName;
-	private String sessionStartTime;
-	private String sessionEndTime;
+	private long sessionStartTime;
+	private long sessionEndTime;
 
 	public String getSessionId() {
 		return sessionId;
@@ -36,19 +36,19 @@ public class SessionInfoDetail extends SessionInfo {
 		this.userName = userName;
 	}
 
-	public String getSessionStartTime() {
+	public long getSessionStartTime() {
 		return sessionStartTime;
 	}
 
-	public void setSessionStartTime(String sessionStartTime) {
+	public void setSessionStartTime(long sessionStartTime) {
 		this.sessionStartTime = sessionStartTime;
 	}
 
-	public String getSessionEndTime() {
+	public long getSessionEndTime() {
 		return sessionEndTime;
 	}
 
-	public void setSessionEndTime(String sessionEndTime) {
+	public void setSessionEndTime(long sessionEndTime) {
 		this.sessionEndTime = sessionEndTime;
 	}
 

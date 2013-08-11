@@ -97,9 +97,9 @@ public class HiveHistoryViewer implements Listener {
 
 			String sessionId = values.get(Keys.SESSION_ID.name());
 			sessionInfo.setSessionId(sessionId);
-			sessionInfo.setSessionStartTime(values.get(Keys.TIME.name()));
+			sessionInfo.setSessionStartTime(Long.parseLong((values.get(Keys.TIME.name())==null?"0":values.get(Keys.TIME.name()))));
 		} else if (recType == RecordTypes.SessionEnd) {
-			sessionInfo.setSessionEndTime(values.get(Keys.TIME.name()));
+			sessionInfo.setSessionEndTime(Long.parseLong(values.get(Keys.TIME.name())==null?"0":values.get(Keys.TIME.name())));
 		} else if (recType == RecordTypes.QueryStart) {
 			String key = values.get(Keys.QUERY_ID.name());
 			QueryInfo ji;
