@@ -1,4 +1,4 @@
-CREATE TABLE hive_session_log(
+CREATE TABLE IF NOT EXISTS hive_session_log(
 sessionid STRING,
 hostip STRING,
 username STRING,
@@ -11,7 +11,7 @@ STORED AS TEXTFILE;
 
 load data local inpath '/usr/local/hadoop/out/sessionLog'  OVERWRITE INTO TABLE  hive_session_log;
 
-CREATE TABLE hive_query_log(
+CREATE TABLE IF NOT EXISTS hive_query_log(
 queryid STRING,
 sessionid STRING,
 querystring STRING,
@@ -26,7 +26,7 @@ STORED AS TEXTFILE;
 
 load data local inpath '/usr/local/hadoop/out/queryLog'  OVERWRITE INTO TABLE  hive_query_log;
 
-CREATE TABLE hive_task_log(
+CREATE TABLE IF NOT EXISTS hive_task_log(
 taskid 	STRING,
 queryid STRING,
 taskname STRING,
