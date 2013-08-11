@@ -27,6 +27,7 @@ public class HiveHistoryParser {
 	
 	private static long numParsedDir = 0;
 	private static long numParsedFile = 0;
+	private static long numParsedFilePerDir = 0;
 
 	public static void parseOneFile(File logFile) {
 
@@ -159,6 +160,7 @@ public class HiveHistoryParser {
 				System.exit(1);
 			} else {
 				System.err.println("Start parsing Hive Query Log in dir :" + args[0]);
+				numParsedFilePerDir = 0;
 				File[] hiveQueryLogDirPerUsers = hiveQueryLogDir.listFiles();
 				for (File userHiveQueryLogDir : hiveQueryLogDirPerUsers) {
 					if (!userHiveQueryLogDir.isDirectory()) {
@@ -187,6 +189,7 @@ public class HiveHistoryParser {
 									}
 									
 									numParsedFile++;
+									numParsedFilePerDir++;
 									
 									if (numParsedFile %100 ==0) {
 										System.err.println(numParsedFile + " file parsed.");
@@ -201,6 +204,8 @@ public class HiveHistoryParser {
 						}
 						
 						numParsedDir++;
+						System.err.println(numParsedFilePerDir + " file parsed in dir: "+ dirName);
+						
 						if (numParsedDir%10==0) {
 							System.err.println(numParsedDir + " dir parsed.");
 						}
