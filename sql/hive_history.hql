@@ -38,7 +38,7 @@ tasknummappers INT,
 tasknumreducers INT,
 taskhadoopprogress STRING,
 taskcounters STRING,
-taskrowinserted LONG
+taskrowinserted BIGINT
 )
 ROW FORMAT DELIMITED
    FIELDS TERMINATED BY '\t' 
