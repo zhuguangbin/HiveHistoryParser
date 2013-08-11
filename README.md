@@ -26,6 +26,6 @@ log format:
 
 4. java -jar HiveHistoryParser.jar
    
-   results are three tsv file in the "out" directory. you can load it to hive for analysis.
+   results are three tsv file in the "out" directory. You can load it to hive for analysis. Hive table ddl sql in sql/hive_history.hql
 
 
