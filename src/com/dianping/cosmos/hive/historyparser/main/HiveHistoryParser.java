@@ -200,7 +200,6 @@ public class HiveHistoryParser {
 							}
 						}
 						
-						System.err.println( numParsedFile + " file in dir: "+ dirName + " parsed.");
 						numParsedDir++;
 						if (numParsedDir%10==0) {
 							System.err.println(numParsedDir + " dir parsed.");
