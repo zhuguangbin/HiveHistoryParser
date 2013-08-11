@@ -9,7 +9,7 @@ ROW FORMAT DELIMITED
    FIELDS TERMINATED BY '\t' 
 STORED AS TEXTFILE;
 
-load data local inpath '/usr/local/hadoop/out/sessionLog'  OVERWRITE INTO TABLE  hive_session_log;
+load data local inpath '/usr/local/hadoop/hivehistoryparser/out/sessionLog'  OVERWRITE INTO TABLE  hive_session_log;
 
 CREATE TABLE IF NOT EXISTS hive_query_log(
 queryid STRING,
@@ -24,7 +24,7 @@ ROW FORMAT DELIMITED
    FIELDS TERMINATED BY '\t' 
 STORED AS TEXTFILE;
 
-load data local inpath '/usr/local/hadoop/out/queryLog'  OVERWRITE INTO TABLE  hive_query_log;
+load data local inpath '/usr/local/hadoop/hivehistoryparser/out/queryLog'  OVERWRITE INTO TABLE  hive_query_log;
 
 CREATE TABLE IF NOT EXISTS hive_task_log(
 taskid 	STRING,
@@ -44,4 +44,4 @@ ROW FORMAT DELIMITED
    FIELDS TERMINATED BY '\t' 
 STORED AS TEXTFILE;
 
-load data local inpath '/usr/local/hadoop/out/taskLog'  OVERWRITE INTO TABLE  hive_task_log;
+load data local inpath '/usr/local/hadoop/hivehistoryparser/out/taskLog'  OVERWRITE INTO TABLE  hive_task_log;
