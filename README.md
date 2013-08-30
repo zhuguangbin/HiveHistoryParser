@@ -24,7 +24,7 @@ log format:
 
 3. export runnable jar
 
-4. java -jar HiveHistoryParser.jar
+4. java -jar HiveHistoryParser.jar  <hive-query-log-dir> [YYYYMMDDhhmm]
    
    results are three tsv file in the "out" directory. You can load it to hive for analysis. Hive table ddl sql in sql/hive_history.hql
 
