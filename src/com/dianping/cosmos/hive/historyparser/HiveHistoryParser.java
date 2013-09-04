@@ -19,14 +19,15 @@ import com.dianping.cosmos.hive.historyparser.model.QueryInfoDetail;
 import com.dianping.cosmos.hive.historyparser.model.SessionInfoDetail;
 import com.dianping.cosmos.hive.historyparser.model.TaskInfoDetail;
 
-public class HiveHistoryParser extends Thread {
+public class HiveHistoryParser {
 	
 	private static final Logger log = Logger.getLogger(HiveHistoryParser.class);
 	private static final Logger sessionLog = Logger.getLogger("SessionLog");
 	private static final Logger queryLog = Logger.getLogger("QueryLog");
 	private static final Logger taskLog = Logger.getLogger("TaskLog");
 	
-	private static long numParsedFile = 0;
+	private static long numTotalParsedFile = 0;
+	private static long numParsedFilePerDir = 0;
 
 	private File userLogDir;
 	private String datePattern;
@@ -36,8 +37,7 @@ public class HiveHistoryParser extends Thread {
 		this.datePattern = datePattern;
 	}
 
-	@Override
-	public void run() {
+	public void parseDir() {
 
 		System.err.println("parsing Hive Query Log in dir :"
 				+ userLogDir.getAbsolutePath());
@@ -70,10 +70,10 @@ public class HiveHistoryParser extends Thread {
 								+ logFile.getAbsolutePath());
 					}
 
-					numParsedFile++;
+					numParsedFilePerDir++;
 
-					if (numParsedFile % 100 == 0) {
-						System.err.println(numParsedFile + " file parsed.");
+					if (numParsedFilePerDir % 100 == 0) {
+						System.err.println(numParsedFilePerDir + " file parsed in dir: "+ dirName);
 					}
 
 				} else {
@@ -84,7 +84,8 @@ public class HiveHistoryParser extends Thread {
 				}
 			}
 			
-			System.err.println("Summary: "+ numParsedFile + " parsed in dir: " + dirName);
+			System.err.println("Summary: "+ numParsedFilePerDir + " parsed in dir: " + dirName);
+			numParsedFilePerDir = 0;
 
 		}
 

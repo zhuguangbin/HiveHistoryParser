@@ -9,6 +9,8 @@ public class Main {
 
 	private static final Logger log = Logger.getLogger(Main.class);
 	
+	private static long numParsedDir = 0;
+	
 
 	public static void printUsage() {
 		System.err.println("Usage: Main <hive-query-log-dir> [YYYYMMDDhhmm]");
@@ -50,9 +52,12 @@ public class Main {
 								+ " is not a user hive-query-log directory!");
 						log.error(userHiveQueryLogDir.getAbsolutePath()	+ " is not a user hive-query-log directory!");
 					} else {
-						new HiveHistoryParser(userHiveQueryLogDir, datePattern).start();
+						new HiveHistoryParser(userHiveQueryLogDir, datePattern).parseDir();
+						numParsedDir++;
 					}
 				}
+				
+				System.err.println("-------------------------Hive History Parsed Done! "+ numParsedDir + " dir parsed totally----------------");
 			}
 			
 		}
